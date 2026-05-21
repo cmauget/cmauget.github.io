@@ -1,28 +1,1099 @@
 <!DOCTYPE html>
-<html>
-	<head>
-		<title>Hank Quinlan, Horrible Cop</title>
-	</head>
-	<body>
-		<nav>
-    		<ul>
-        		<li><a href="/">Home</a></li>
-	        	<li><a href="/about">About</a></li>
-        		<li><a href="/cv">CV</a></li>
-        		<li><a href="/blog">Blog</a></li>
-    		</ul>
-		</nav>
-		<div class="container">
-    		<div class="blurb">
-        		<h1>Hi there, I'm Hank Quinlan!</h1>
-				<p>I'm best known as the horrible cop from <em>A Touch of Evil</em> Don't trust me. <a href="/about">Read more about my life...</a></p>
-    		</div><!-- /.blurb -->
-		</div><!-- /.container -->
-		<footer>
-    		<ul>
-        		<li><a href="mailto:hankquinlanhub@gmail.com">email</a></li>
-        		<li><a href="https://github.com/hankquinlan">github.com/hankquinlan</a></li>
-			</ul>
-		</footer>
-	</body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clément Mauget</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --bg2: #141414;
+      --surface: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #e8e4dc;
+      --muted: #7a7670;
+      --accent: #c8a96e;
+      --accent2: #7eb8a4;
+      --mono: 'JetBrains Mono', monospace;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Jost', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background:
+        repeating-linear-gradient(90deg, rgba(232, 228, 220, 0.018) 0 1px, transparent 1px 96px),
+        repeating-linear-gradient(0deg, rgba(232, 228, 220, 0.014) 0 1px, transparent 1px 96px),
+        repeating-linear-gradient(135deg, rgba(126, 184, 164, 0.018) 0 1px, transparent 1px 28px),
+        var(--bg);
+      background-attachment: fixed;
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E"),
+        linear-gradient(120deg, transparent 0%, rgba(200, 169, 110, 0.035) 38%, transparent 72%);
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.78;
+      mix-blend-mode: soft-light;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 4rem;
+      background: linear-gradient(to bottom, rgba(13,13,13,0.95) 0%, rgba(13,13,13,0) 100%);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(260px, 0.82fr);
+      align-items: center;
+      padding: 8rem 4rem 4rem;
+      gap: 2.8rem;
+    }
+
+    .hero-left { max-width: 680px; }
+
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 2rem; height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 2rem;
+    }
+
+    h1 em { font-style: italic; color: var(--accent); }
+
+    .hero-summary {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.85;
+      margin-bottom: 3rem;
+      max-width: 70ch;
+    }
+
+    .hero-summary strong { color: var(--text); font-weight: 400; }
+
+    .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.85rem 1.8rem;
+      border: 1px solid;
+      transition: all 0.25s;
+      display: inline-block;
+    }
+
+    .btn-primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+    .btn-primary:hover { background: transparent; color: var(--accent); }
+    .btn-outline { background: transparent; border-color: var(--border); color: var(--muted); }
+    .btn-outline:hover { border-color: var(--accent2); color: var(--accent2); }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+
+    .hero-right > .stat-card { display: none; }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--accent);
+    }
+
+    .stat-card.teal::before { background: var(--accent2); }
+
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-value { font-family: var(--serif); font-size: 1.3rem; color: var(--text); font-weight: 400; }
+    .stat-sub { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+
+    .decoder-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 0;
+      position: relative;
+      overflow: visible;
+    }
+
+    .decoder-controls {
+      width: min(12rem, 70%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .decoder-button {
+      cursor: pointer;
+      background: transparent;
+      border-color: var(--accent2);
+      color: var(--accent2);
+      white-space: nowrap;
+      transform-origin: center;
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .decoder-button:hover,
+    .decoder-button:focus-visible {
+      background: var(--accent2);
+      color: var(--bg);
+      outline: none;
+    }
+
+    .decoder-button:disabled {
+      cursor: default;
+      opacity: 0.72;
+    }
+
+    .decoder-button.is-clicking {
+      animation: decodeButtonBounce 420ms cubic-bezier(0.2, 0.9, 0.25, 1.25);
+    }
+
+    .decoder-progress {
+      width: 100%;
+      height: 2px;
+      background: rgba(232, 228, 220, 0.16);
+      overflow: hidden;
+    }
+
+    .decoder-progress-fill {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.32s ease;
+    }
+
+    .decoder-viewport {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      min-height: 260px;
+      padding: 0;
+      position: relative;
+      overflow: visible;
+    }
+
+    .decoder-image-wrap {
+      width: min(76%, 300px);
+      display: grid;
+      place-items: center;
+      position: relative;
+      z-index: 1;
+      animation: layerFloat 5s ease-in-out infinite;
+    }
+
+    .decoder-image-wrap::before {
+      content: '';
+      position: absolute;
+      left: 11%;
+      right: 11%;
+      bottom: -0.7rem;
+      height: 0.55rem;
+      background: rgba(0, 0, 0, 0.42);
+      filter: blur(10px);
+      transform: scaleX(0.88);
+      z-index: -1;
+    }
+
+    #layerCanvas {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.42));
+      transform-origin: center;
+    }
+
+    #layerCanvas.is-stepping {
+      animation: layerStep 520ms cubic-bezier(0.2, 0.9, 0.25, 1.16);
+    }
+
+    .decoder-callout {
+      position: absolute;
+      left: clamp(-1.8rem, -2vw, -0.2rem);
+      top: 1.2rem;
+      display: grid;
+      grid-template-columns: auto 6.5rem;
+      align-items: end;
+      gap: 0.25rem;
+      color: var(--accent);
+      pointer-events: none;
+      transform: rotate(-5deg);
+      animation: calloutFloat 5.4s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    .decoder-callout span {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-style: italic;
+      line-height: 1;
+      color: var(--text);
+      text-shadow: 0 8px 18px rgba(0, 0, 0, 0.38);
+    }
+
+    .decoder-arrow {
+      width: 6.5rem;
+      height: 4rem;
+      overflow: visible;
+      stroke: currentColor;
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      display: flex; align-items: center; gap: 1.5rem;
+      padding: 0 4rem;
+      margin: 1rem 0;
+    }
+
+    .section-divider span {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .section-divider::before, .section-divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 6rem 4rem;
+      position: relative;
+    }
+
+    section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(0deg, rgba(232, 228, 220, 0.018) 0 1px, transparent 1px 44px),
+        repeating-linear-gradient(90deg, rgba(126, 184, 164, 0.012) 0 1px, transparent 1px 56px);
+      opacity: 0.34;
+      pointer-events: none;
+    }
+
+    section > * {
+      position: relative;
+      z-index: 1;
+    }
+    .section-header { margin-bottom: 4rem; }
+
+    .section-num {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.15;
+    }
+
+    h2 em { font-style: italic; color: var(--accent2); }
+
+    /* ── MOTIVATION ── */
+    #motivation {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .motivation-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .motivation-aside { position: sticky; top: 8rem; }
+
+    .motivation-aside .big-quote {
+      font-family: var(--serif);
+      font-size: 4rem;
+      line-height: 1;
+      color: var(--accent);
+      opacity: 0.25;
+      margin-bottom: -1rem;
+    }
+
+    .pull-quote {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.5;
+      border-left: 2px solid var(--accent);
+      padding-left: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .motivation-body p { font-size: 1.05rem; color: #b5b0a8; line-height: 1.9; margin-bottom: 1.5rem; }
+    .motivation-body strong { color: var(--text); font-weight: 400; }
+
+    .interest-tags { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2.5rem; }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.8rem;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      transition: all 0.2s;
+    }
+
+    .tag:hover { border-color: var(--accent2); color: var(--accent2); }
+
+    /* ── RESEARCH ── */
+    #research {
+      background:
+        linear-gradient(180deg, rgba(232, 228, 220, 0.018), transparent 34rem),
+        var(--bg);
+    }
+
+    /* Featured publication */
+    .featured-publication {
+      border: 1px solid var(--accent);
+      background:
+        repeating-linear-gradient(135deg, rgba(232, 228, 220, 0.018) 0 1px, transparent 1px 18px),
+        var(--surface);
+      margin-bottom: 1.5rem;
+    }
+
+    .featured-pub-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      padding: 2.5rem;
+      align-items: start;
+    }
+
+    .featured-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+
+    .featured-label.teal { color: var(--accent2); }
+
+    .featured-pub-title {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.35;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+    }
+
+    .featured-pub-authors {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .featured-pub-authors em { color: var(--accent); font-style: normal; font-weight: 400; }
+
+    .featured-pub-desc {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .featured-pub-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .featured-pub-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      min-width: 160px;
+      border-left: 1px solid var(--border);
+      padding-left: 2rem;
+    }
+
+    .pub-context-block .pcb-label,
+    .proj-stat .pcb-label {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .pub-context-block .pcb-value,
+    .proj-stat .pcb-value {
+      font-family: var(--serif);
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    /* Featured project */
+    .featured-project {
+      border: 1px solid var(--border);
+      background:
+        repeating-linear-gradient(45deg, rgba(126, 184, 164, 0.018) 0 1px, transparent 1px 20px),
+        var(--surface);
+      margin-bottom: 1.5rem;
+      transition: border-color 0.25s;
+    }
+
+    .featured-project:hover { border-color: var(--accent2); }
+
+    .featured-proj-inner { padding: 2.5rem; }
+
+    .featured-proj-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .proj-links { display: flex; gap: 0.8rem; }
+
+    .proj-link {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+
+    .proj-link:hover { border-color: var(--accent2); color: var(--accent2); }
+
+    .featured-proj-body {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .featured-proj-title {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .featured-proj-subtitle {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      color: var(--accent2);
+      margin-bottom: 1.2rem;
+    }
+
+    .featured-proj-desc {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 0.8rem;
+    }
+
+    .featured-proj-aside {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      min-width: 160px;
+      border-left: 1px solid var(--border);
+      padding-left: 2rem;
+    }
+
+    /* ── BLOG TEASER ── */
+    #blog { background: var(--bg); border-top: 1px solid var(--border); }
+
+    .blog-soon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 0;
+      gap: 1rem;
+    }
+
+    .blog-soon-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .blog-soon h3 { font-family: var(--serif); font-size: 2.5rem; font-weight: 300; color: var(--text); }
+    .blog-soon p { font-size: 0.95rem; color: var(--muted); max-width: 50ch; line-height: 1.8; }
+
+    .placeholder-posts { display: flex; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap; justify-content: center; }
+
+    .placeholder-post {
+      width: 260px;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      padding: 1.5rem;
+      opacity: 0.5;
+    }
+
+    .placeholder-post .pp-tag {
+      font-family: var(--mono);
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 0.6rem;
+    }
+
+    .placeholder-post .pp-title { font-family: var(--serif); font-size: 1.05rem; color: var(--text); line-height: 1.4; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-name { font-family: var(--serif); font-size: 1.1rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+
+    .footer-links a {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes layerFloat {
+      0%, 100% { transform: translateY(0) rotate(-0.35deg); }
+      50% { transform: translateY(-8px) rotate(0.35deg); }
+    }
+
+    @keyframes layerStep {
+      0% { transform: translateY(0) scale(1); }
+      42% { transform: translateY(-14px) scale(1.035); }
+      68% { transform: translateY(4px) scale(0.992); }
+      100% { transform: translateY(0) scale(1); }
+    }
+
+    @keyframes decodeButtonBounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      36% { transform: translateY(-5px) scale(1.025); }
+      68% { transform: translateY(2px) scale(0.985); }
+    }
+
+    @keyframes calloutFloat {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-5px) rotate(-3deg); }
+    }
+
+    .hero-left { opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards; }
+    .hero-right { opacity: 0; animation: fadeUp 0.8s ease 0.35s forwards; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 2rem; }
+      .nav-links { gap: 1.5rem; }
+      #hero { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; gap: 3rem; }
+      .hero-left { max-width: 100%; }
+      section { padding: 4rem 2rem; }
+      .motivation-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .motivation-aside { position: static; }
+      .featured-pub-inner,
+      .featured-proj-body { grid-template-columns: 1fr; gap: 2rem; }
+      .featured-pub-right,
+      .featured-proj-aside { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 1.5rem; flex-direction: row; flex-wrap: wrap; gap: 1.5rem; }
+      .featured-proj-header { flex-direction: column; align-items: flex-start; }
+      .section-divider { padding: 0 2rem; }
+      footer { padding: 2rem; }
+    }
+
+    @media (max-width: 520px) {
+      .decoder-viewport { min-height: 220px; }
+      .decoder-image-wrap { width: min(82%, 260px); }
+      .decoder-callout {
+        left: 0.2rem;
+        top: 0.4rem;
+        grid-template-columns: auto 4.8rem;
+      }
+      .decoder-callout span { font-size: 1.12rem; }
+      .decoder-arrow { width: 4.8rem; height: 3rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .decoder-image-wrap,
+      .decoder-callout,
+      #layerCanvas.is-stepping,
+      .decoder-button.is-clicking {
+        animation: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">Clément Mauget</a>
+    <ul class="nav-links">
+      <li><a href="#motivation">About</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#blog">Blog</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-left">
+      <div class="hero-tag">Applied Mathematics · AI</div>
+      <h1>Clément <em>Mauget</em></h1>
+      <p class="hero-summary">
+        I aim to build <strong>explainable and frugal multimodal AI</strong> systems at the intersection of
+        computer vision, 3D representation, and language. Based in Paris, I'm looking to pursue
+        a PhD with impact in <strong>latent space representation and post-hoc detection</strong>.
+      </p>
+      <div class="cta-group">
+        <a href="mailto:clement.mauget@gmail.com" class="btn btn-primary">Get in touch</a>
+        <a href="#research" class="btn btn-outline">Research →</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="decoder-panel">
+        <div class="decoder-viewport" id="decoderViewport">
+          <div class="decoder-callout" aria-hidden="true">
+            <span>Me</span>
+            <svg class="decoder-arrow" viewBox="0 -55 104 64" fill="none" aria-hidden="true">
+              <path d="M5 12 C30 56 70 54 96 22" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M84 20 L97 22 L91 34" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="decoder-image-wrap" id="decoderImageWrap">
+            <canvas id="layerCanvas" width="99" height="126" aria-label="Layer 8 from image.png"></canvas>
+          </div>
+        </div>
+        <div class="decoder-controls">
+          <button class="btn decoder-button" id="decodeButton" type="button">Decode</button>
+          <div class="decoder-progress" aria-hidden="true">
+            <span class="decoder-progress-fill" id="decoderProgressFill"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span>§ 01</span></div>
+
+  <!-- MOTIVATION -->
+  <section id="motivation">
+    <div class="motivation-grid">
+      <div class="motivation-aside">
+        <div class="big-quote">"</div>
+        <blockquote class="pull-quote">
+          Intelligence that cannot explain itself is intelligence we cannot trust.
+        </blockquote>
+        <div style="margin-top: 2rem;">
+          <div class="stat-label" style="font-family: var(--mono); font-size:0.6rem; letter-spacing:0.14em; text-transform:uppercase; color: var(--muted); margin-bottom:0.5rem;">Research interests</div>
+          <div class="interest-tags">
+            <span class="tag">Explainable AI</span>
+            <span class="tag">Latent Space Representation</span>
+            <span class="tag">Multimodality</span>
+            <span class="tag">Computer Vision</span>
+            <span class="tag">Healthcare AI</span>
+          </div>
+        </div>
+      </div>
+      <div class="motivation-body">
+        <div class="section-header">
+          <div class="section-num">01 — Motivation</div>
+          <h2>Why I do <em>this work</em></h2>
+        </div>
+        <p>
+          Modern AI systems are extraordinarily capable, and extraordinarily opaque. As they find their way
+          into high-stakes domains like medicine, journalism, and environmental monitoring, the gap between
+          what a model <strong>does</strong> and what we can <strong>understand about what it does</strong> becomes a fundamental problem.
+        </p>
+        <p>
+          I'm drawn to questions about how multimodal models can be made more <strong>interpretable, efficient, and grounded</strong>
+          in physical reality and use the richness of modality for this purpose. Not more powerful in the abstract, but more trustworthy in the specific.
+        </p>
+        <p>
+          Beyond a standalone research topic, I believe the most interesting problems live at disciplinary boundaries — between computer science and medicine, between perception and language, between the digital and the physical.
+        </p>
+        <p>
+          I also believe that research has a responsibility to be accessible. I'm drawn to teaching,
+          to writing that reaches non-specialists, and to building tools that make the consequences of
+          AI research legible to the people it affects.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span>§ 02</span></div>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="section-header">
+      <div class="section-num">02 — Research</div>
+      <h2>Selected work &amp; <em>interests</em></h2>
+    </div>
+
+    <!-- FEATURED: Publication -->
+    <div class="featured-publication">
+      <div class="featured-pub-inner">
+        <div class="featured-pub-left">
+          <div class="featured-label">
+            <span class="featured-star">★</span> Peer-reviewed publication
+          </div>
+          <h3 class="featured-pub-title">
+            A new automatic approach based on visible-thermal infrared data fusion to detect geological
+            fracturation: the case of the Vaches Noires badland, Normandy, France
+          </h3>
+          <div class="featured-pub-authors">
+            Z. Lambert, R. Antoine, <em>C. Mauget</em> &nbsp;·&nbsp; CEREMA, 2023
+          </div>
+          <p class="featured-pub-desc">
+            Designed and implemented a multi-spectral pipeline combining visible and thermal infrared imagery
+            to automatically detect geological fractures in badland terrain. Developed super-resolution
+            preprocessing and CNN-based crack detection on industrial thermal datasets.
+          </p>
+          <div class="featured-pub-tags">
+            <span class="tag">Thermal Imaging</span>
+            <span class="tag">Geophysic</span>
+            <span class="tag">CNN</span>
+            <span class="tag">Remote Sensing</span>
+            <span class="tag">Data Fusion</span>
+          </div>
+        </div>
+        <div class="featured-pub-right">
+          <div class="proj-links">
+            <a href="https://link.springer.com/article/10.1007/s10346-025-02637-1" target="_blank" class="proj-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Paper
+            </a>
+          </div>
+          <div class="pub-context-block">
+            <div class="pcb-label">Institution</div>
+            <div class="pcb-value">CEREMA, Rouen</div>
+          </div>
+          <div class="pub-context-block">
+            <div class="pcb-label">Year</div>
+            <div class="pcb-value">2023</div>
+          </div>
+          <div class="pub-context-block">
+            <div class="pcb-label">Role</div>
+            <div class="pcb-value">Co-author &amp; pipeline engineer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURED: DeLDRify -->
+    <div class="featured-project">
+      <div class="featured-proj-inner">
+        <div class="featured-proj-header">
+          <div class="featured-label teal">
+            Featured project &nbsp;·&nbsp; KAIST Exchange, 2023–2024
+          </div>
+          
+        </div>
+        <div class="featured-proj-body">
+          <div class="featured-proj-text">
+            <h3 class="featured-proj-title">DeLDRify</h3>
+            <p class="featured-proj-subtitle">LDR-to-HDR Image Reconstruction via Generative Adversarial Networks</p>
+            <p class="featured-proj-desc">
+              Standard photographs discard most of the luminance information captured by the human eye.
+              DeLDRify reconstructs this lost dynamic range from a single LDR image using a custom
+              GAN architecture trained to hallucinate physically plausible highlight and shadow detail.
+            </p>
+            <p class="featured-proj-desc">
+              The project included a full ablation study, quantitative comparison with SOTA baselines,
+              and a CVPR-format scientific report covering the theoretical motivation, architecture design,
+              and experimental results.
+            </p>
+            <div class="featured-pub-tags" style="margin-top: 1.5rem;">
+              <span class="tag">GANs</span>
+              <span class="tag">HDR Imaging</span>
+              <span class="tag">Image Synthesis</span>
+              <span class="tag">Computer Vision</span>
+              <span class="tag">PyTorch</span>
+            </div>
+          </div>
+          <div class="featured-proj-aside">
+            <div class="proj-links">
+            <a href="https://github.com/oskarjor/DeLDRify" target="_blank" class="proj-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+            <a href="https://github.com/oskarjor/DeLDRify/blob/main/GAN_Final_Paper_Project.pdf" target="_blank" class="proj-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              PDF
+            </a>
+          </div>
+            <div class="proj-stat">
+              <div class="pcb-label">Format</div>
+              <div class="pcb-value">CVPR-style report</div>
+            </div>
+            <div class="proj-stat">
+              <div class="pcb-label">Method</div>
+              <div class="pcb-value">GAN-based synthesis</div>
+            </div>
+            <div class="proj-stat">
+              <div class="pcb-label">Code</div>
+              <div class="pcb-value">Open source</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><span>§ 03</span></div>
+
+  <!-- BLOG TEASER -->
+  <section id="blog">
+    <div class="blog-soon">
+      <div class="blog-soon-label">Coming soon</div>
+      <h3>Notes &amp; Writing</h3>
+      <p>
+        A space for thinking &amp; writing: paper reviews, technical explainers, and what it means to build things that matter.
+      </p>
+      <div class="placeholder-posts">
+        <div class="placeholder-post">
+          <div class="pp-tag">Paper Review</div>
+          <div class="pp-title">What do Vision-Language Models actually learn?</div>
+        </div>
+        <div class="placeholder-post">
+          <div class="pp-tag">Essay</div>
+          <div class="pp-title">The case for frugal AI in high-stakes domains</div>
+        </div>
+        <div class="placeholder-post">
+          <div class="pp-tag">Technical</div>
+          <div class="pp-title">3D tokenization: from point clouds to language</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-name">Clément Mauget — Paris, France</div>
+    <ul class="footer-links">
+      <li><a href="mailto:clement.mauget@gmail.com">Email</a></li>
+      <li><a href="https://github.com/cmauget" target="_blank">GitHub</a></li>
+      <li><a href="https://linkedin.com/in/clement--mauget" target="_blank">LinkedIn</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    (() => {
+      const canvas = document.getElementById('layerCanvas');
+      const button = document.getElementById('decodeButton');
+      const progressFill = document.getElementById('decoderProgressFill');
+
+      if (!canvas || !button || !progressFill) return;
+
+      const ctx = canvas.getContext('2d');
+      const image = new Image();
+      const firstLayer = 8;
+      const lastLayer = 16;
+      const totalLayers = 16;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let currentLayer = firstLayer;
+
+      button.disabled = true;
+
+      function updateProgress(layer) {
+        const progress = (layer - firstLayer) / (lastLayer - firstLayer);
+        progressFill.style.transform = `scaleX(${Math.max(0, Math.min(progress, 1))})`;
+      }
+
+      function drawLayer(layer) {
+        if (!ctx || !image.naturalWidth) return;
+
+        currentLayer = layer;
+        const frameWidth = image.naturalWidth / totalLayers;
+        const sourceX = Math.round(frameWidth * (layer - 1));
+        const nextX = Math.round(frameWidth * layer);
+        const sourceWidth = nextX - sourceX;
+
+        canvas.width = sourceWidth;
+        canvas.height = image.naturalHeight;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(
+          image,
+          sourceX,
+          0,
+          sourceWidth,
+          image.naturalHeight,
+          0,
+          0,
+          sourceWidth,
+          image.naturalHeight
+        );
+
+        canvas.setAttribute('aria-label', `Layer ${layer} from image.png`);
+        updateProgress(layer);
+      }
+
+      function replayAnimation(element, className) {
+        if (reducedMotion) return;
+
+        element.classList.remove(className);
+        void element.offsetWidth;
+        element.classList.add(className);
+        element.addEventListener('animationend', () => {
+          element.classList.remove(className);
+        }, { once: true });
+      }
+
+      function decode() {
+        if (currentLayer >= lastLayer) return;
+
+        const nextLayer = currentLayer + 1;
+        drawLayer(nextLayer);
+        replayAnimation(button, 'is-clicking');
+        replayAnimation(canvas, 'is-stepping');
+
+        if (nextLayer >= lastLayer) {
+          button.disabled = true;
+          button.textContent = 'Decoded';
+        }
+      }
+
+      image.addEventListener('load', () => {
+        drawLayer(firstLayer);
+        button.textContent = 'Decode';
+        button.disabled = false;
+      });
+      image.src = 'output.png';
+      button.addEventListener('click', decode);
+    })();
+  </script>
+
+</body>
 </html>
